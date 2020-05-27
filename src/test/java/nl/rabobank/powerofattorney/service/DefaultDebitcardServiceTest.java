@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class DefaultDebitcardServiceTest {
 
-    private static final String SERVICE_URL = "http://mockservice/debitcards/";
+    private static final String SERVICE_URL = "http://mockservice/debitcards";
     private static final String URL_PROP_NAME = "url";
 
     @Mock
@@ -34,7 +34,7 @@ class DefaultDebitcardServiceTest {
     @Test
     public void retrieveDebitCardTest() {
         DebitCard debitCard = createDebitCard();
-        when(restTemplate.getForObject(SERVICE_URL + debitCard.getId(), DebitCard.class)).thenReturn(debitCard);
+        when(restTemplate.getForObject(SERVICE_URL + "/" + debitCard.getId(), DebitCard.class)).thenReturn(debitCard);
         final DebitCard result = service.retrieveDebitCard(debitCard.getId());
         assertResult(debitCard, result);
     }

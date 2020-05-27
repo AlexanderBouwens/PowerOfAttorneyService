@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class DefaultPowerOfAttorneyServiceTest {
 
-    private static final String SERVICE_URL = "http://mockservice/powerofattorney/";
+    private static final String SERVICE_URL = "http://mockservice/powerofattorney";
     private static final String URL_PROP_NAME = "url";
 
     @Mock
@@ -39,9 +39,9 @@ class DefaultPowerOfAttorneyServiceTest {
         PowerOfAttorney noPower = createPowerOfAttorney("3", "me", "the dude", "NL00RABO000000000", Direction.GIVEN, Arrays.asList(Authorization.CREDIT_CARD), Arrays.asList(createCardReference("2", CardType.CREDIT_CARD)));
 
         when(restTemplate.getForObject(SERVICE_URL, PowerOfAttorney[].class)).thenReturn(new PowerOfAttorney[]{allPower, somePower, noPower});
-        when(restTemplate.getForObject(SERVICE_URL + allPower.getId(), PowerOfAttorney.class)).thenReturn(allPower);
-        when(restTemplate.getForObject(SERVICE_URL + somePower.getId(), PowerOfAttorney.class)).thenReturn(somePower);
-        when(restTemplate.getForObject(SERVICE_URL + noPower.getId(), PowerOfAttorney.class)).thenReturn(noPower);
+        when(restTemplate.getForObject(SERVICE_URL + "/"+ allPower.getId(), PowerOfAttorney.class)).thenReturn(allPower);
+        when(restTemplate.getForObject(SERVICE_URL + "/"+ somePower.getId(), PowerOfAttorney.class)).thenReturn(somePower);
+        when(restTemplate.getForObject(SERVICE_URL + "/"+ noPower.getId(), PowerOfAttorney.class)).thenReturn(noPower);
 
         final List<PowerOfAttorney> result = service.retrieveAllPowerOfAttorneysByGranteeOrGrantor("you");
         assertResult(allPower, somePower, result);

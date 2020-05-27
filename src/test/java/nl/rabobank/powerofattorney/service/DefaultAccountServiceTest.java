@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class DefaultAccountServiceTest {
 
-    private static final String SERVICE_URL = "http://mockservice/accounts/";
+    private static final String SERVICE_URL = "http://mockservice/accounts";
     private static final String URL_PROP_NAME = "url";
     private static final String ACCOUNT_ID = "000000000";
     private static final String COUNTRYCODE_BANKCODE = "NL00RABO";
@@ -34,7 +34,7 @@ class DefaultAccountServiceTest {
     @Test
     public void retrieveAccountTest() {
         Account account = createAccount();
-        when(restTemplate.getForObject(SERVICE_URL + ACCOUNT_ID, Account.class)).thenReturn(account);
+        when(restTemplate.getForObject(SERVICE_URL + "/" + ACCOUNT_ID, Account.class)).thenReturn(account);
         final Account result = service.retrieveAccount(account.getId());
         assertResult(account, result);
     }
